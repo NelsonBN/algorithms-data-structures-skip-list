@@ -13,5 +13,11 @@
 
 
 
+## Demos
+- [No Duplicates](./src/no_duplicates.py)
+- [Allowing Duplicates](./src/allowing_duplicates.py)
+
+
+
 ## References
 - [Other Algorithms & Data Structures](https://github.com/NelsonBN/algorithms-data-structures)
