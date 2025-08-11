@@ -15,7 +15,7 @@ class SkipList:
         self.header = Node(None, self.max_levels - 1) # Header node (sentinel)
 
 
-    def __get_highest_level(self):
+    def __generate_node_height(self):
         level = 0
         while random.random() < self.p and level < self.max_levels - 1:
             level += 1
@@ -36,17 +36,17 @@ class SkipList:
         # So, we move to the next node at level 0 because we want to insert after it
         current = current.forward[0]
 
-        highest_level_new_node = self.__get_highest_level()
-        if highest_level_new_node > self.highest_level:
+        new_node_height = self.__generate_node_height()
+        if new_node_height > self.highest_level:
             # When the new node has a higher level that means the header node never had a node at that level
             # So, we will create a new shortcut from the header node to the new node at the new levels
-            for i in range(self.highest_level + 1, highest_level_new_node + 1):
+            for i in range(self.highest_level + 1, new_node_height + 1):
                 update[i] = self.header
-            self.highest_level = highest_level_new_node
+            self.highest_level = new_node_height
 
         # Update the neighbor nodes
-        new_node = Node(key, highest_level_new_node)
-        for i in range(highest_level_new_node + 1): # O(log n)
+        new_node = Node(key, new_node_height)
+        for i in range(new_node_height + 1): # O(log n)
             new_node.forward[i] = update[i].forward[i]
             update[i].forward[i] = new_node
 
